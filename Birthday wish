@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Wish</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  overflow: hidden;
+}
+
+/* 🌸 Flowers Animation */
+.flower {
+  position: absolute;
+  top: -50px;
+  font-size: 25px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* Content */
+.container {
+  position: relative;
+  z-index: 2;
+  margin-top: 50px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+.card {
+  display: none;
+  margin-top: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px gray;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌸 Flowers container -->
+<div id="flowers"></div>
+
+<div class="container">
+  <h1>🌸 Special Wish 🌸</h1>
+
+  <input type="text" id="name" placeholder="Your Name"><br>
+  <input type="text" id="friend" placeholder="Best Friend Name"><br>
+
+  <button onclick="step2()">Next</button>
+
+  <div id="questions" style="display:none;">
+    <p>🌸 Wish You Good Luck 🌸</p>
+    <input type="text" id="q1" placeholder="Favorite Color"><br>
+    <input type="text" id="q2" placeholder="Hobby"><br>
+    <button onclick="showCard()">Create Card</button>
+  </div>
+
+  <div class="card" id="card">
+    <h2>🎉 Happy Birthday 🎉</h2>
+    <p id="result"></p>
+  </div>
+</div>
+
+<script>
+// 🌸 Create falling flowers
+function createFlowers() {
+  const flowerContainer = document.getElementById("flowers");
+
+  for (let i = 0; i < 20; i++) {
+    let flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.innerHTML = "🌸";
+
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+    flower.style.fontSize = (20 + Math.random() * 20) + "px";
+
+    flowerContainer.appendChild(flower);
+  }
+}
+
+createFlowers();
+
+// Steps
+function step2() {
+  document.getElementById("questions").style.display = "block";
+}
+
+function showCard() {
+  let name = document.getElementById("name").value;
+  let friend = document.getElementById("friend").value;
+  let q1 = document.getElementById("q1").value;
+  let q2 = document.getElementById("q2").value;
+
+  let text = `
+  Dear ${friend}, ❤️ <br><br>
+  Tum bohat special ho! <br>
+  Tumhara dost ${name} tumhe wish karta hai 💖 <br><br>
+  
+  🎂 Happy Birthday 🎂 <br><br>
+
+  Favorite Color: ${q1} <br>
+  Hobby: ${q2} <br><br>
+
+  Stay Happy Always 🌸
+  `;
+
+  document.getElementById("result").innerHTML = text;
+  document.getElementById("card").style.display = "block";
+}
+</script>
+
+</body>
+</html>
